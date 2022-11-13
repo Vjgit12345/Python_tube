@@ -1,0 +1,192 @@
+Find and locate
+
+find ./ -name "file_name"
+locate filename
+=================================
+Regular expression
+
+ls -l abc*
+or *abc
+?bcd
+*bcd*
+touch abc{1..9}.txt
+=================================
+Hard link and soft link
+
+ln orginalfilename linkfilename
+ln -s originalfilename linkfilename
+
+==================================
+File directory permission
+
+chmod U+w
+chown username filename or directory
+chgrp groupname filename or directory
+=================================
+Access control list
+
+To provide special and flexible permission for file systems
+
+setfacl and getfacl
+For user:
+setfacl -m u:vijayendranramamoorthy:rwx /path
+
+For group:
+
+setfacl -m g:groupname:wx /paths 
+
+To allow all files or dir'sto inherit
+
+setfacl -rm "entry" /path
+
+To remove a specific entry
+setfacl -x u:user /path to file
+
+To remove all entries
+setfacl -b /path
+
+==================================
+
+Help cmd's
+
+whatis cmd
+man cmd
+help --cmd
+
+=============================
+Input, output and error
+(stdin-0)
+(stdout-1)
+(stderror -2)
+cat < filename
+============================
+Tee cmd
+
+to store and view the simultaneously
+
+ls -l | tee filename
+ls -l | tee -a filename
+
+================================
+
+File maintenance commands
+
+cp 
+mv
+rm
+mkdir
+rmdir
+chown
+chgrp
+
+=================================
+File display cmds
+
+cat,less,more,head,tail
+===============================
+Text processsors cmds
+
+cut, grep,exgrep,awk,wc
+
+cut -c1 filename
+cut -c1,2,4 filename
+cut -c1-3 filename
+cut -c1-3,6-8 filename
+cut -b1-3 filename
+cut -d: -f 6 /dir
+cut -d: -f 6-7 /dir
+ls -ltr | cut -c2-4
+============================
+awk cmds
+
+awk '{print $1,$3}'= List 1 and 3rd field of the o/p
+awk '{print $NF}' =  last field of the o/p
+awk '/word/' '{print}' filename = search the word
+awk -F: '{print}' file = only 1st field of dirc
+echo "" | awk '{$2 == "Adam"; print $0}'
+cat file | awk '{$3 == "Imran"; print $0}'
+awk 'length($0) > 15' file
+ls -lt | awk '{if($9 == "word") print $0;}'
+
+========================================================
+grep = global regular expression print
+
+grep keyword filename
+grep -i keyword filename == ignore casesensitivity
+grep -c keyword filename == count
+grep -n " = matched lines and their line numbers
+grep -v " = Display everything but searched keyword
+egrep -i keyword1 | Keyword 2 filename
+=====================================================
+sort / Uniq 
+
+sort filename = sorts file in alpha
+sort file | uniq = Always sort 1st before goes to unique
+sort file | uniq -c = list -c
+sort file | uniq -d = only shows repeated lines
+Uniq file = Remove duplicates
+sort -r file = reverse alpha order
+sort -k2 file = Sort by field number
+==============================================
+Wc == word count 
+
+wc file = line,word and byte count
+wc -l file = no of lines in a file
+wc -w file = words in a file
+wc -c file = number of bytes
+wc dir = not allowed
+ls -l | wc -l = Number of files
+grep keywrd | wc -l = Number of keyword lines
+
+========================================================
+Compare files
+
+cmp = byte by byte 
+diff = line by line
+
+cmp filename 1 filename 2
+diff filename 1 filename 2
+
+=============================================
+
+Compress and uncompressfiles
+
+tar cvf username filename.tar to make the archive
+tar xvf filename.tar
+gzip filename to compress
+gzip -d or gunzip
+rm -rf dir name to force deletion of the folder
+=====================================================
+
+ssh connection to other server and scp connection
+
+ssh hostname@ip
+
+scp -rv filename user@ip:path of the received server
+
+========================================ZZ
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

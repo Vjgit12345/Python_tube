@@ -1,0 +1,207 @@
+Vi editor
+--d to delete entire line 
+--u to get back the deleted line
+--x to delete single letter
+--o to create a new line and changed to insert mode automatically
+--to replace r and required letter with replace
+--shift + zz to save the file
+--/word to search the word
+substitute in vi editor == esc + :%s/search word/replace word/g
+
+================================
+sed cmd
+
+sed 's/searchword/replcae word/g' filename
+--s means substitute
+--g means global
+sed -i 's/searchword/replcae word/g filename'
+sed '/searchword/d' filename
+to remove empty lines
+
+sed '/^$/d' filename
+^ --starting of the line
+&-- ending of the line
+
+sed '1d' filename -- to delete the first line/ d means delete
+
+to remove tab == sed 's/\t/ /g' filename
+
+sed -n '1,4p' filename
+
+sed G filename == to give empty line after everyline
+
+sed -n 1,4d filename -- to delete the desired line from the file
+to replace a word except particular word == sed '8!s/searchword/s/' filename
+===============================================================================
+7010533120--arthi
+========================================
+User account management
+
+useradd username
+groupadd groupname
+userdel username
+groupadd groupname
+usermod -G groupname username
+chgrp -R groupname username
+file location == etc/passwd,etc/group,etc/shadow
+==========================================
+password aging
+
+chage -d -m -M -W -I -E username
+etc/login.defs
+
+d = last pwd change
+m = min M = max I =inactive E = expiry
+
+=========================================
+switch user and superuser
+
+su - username to change the user
+to run the sudo cmd the user must be part of the wheel group
+to add = usermod -aG wheel username , to verify == grep wheel /etc/group
+=====================================================================
+Monitors users
+
+who - it will list you how many users are login to the server currently
+last -- it will list you the info that whoever logged in the system from the day 1
+w -- same as who cmd but give more additional details
+pinky -- 
+id --  it will give your userinfo
+=============================================================
+Taking with users
+
+Users
+write username
+wall
+
+============================================================
+Linux directory service authentication
+
+Active directory is a directory service
+LDAP is a light weight directory access protocol is a protocol to use for all OS
+AD -- Windows
+IDM -- Identity manager is a product from Redhat to purchase
+WinBND == used to communicate to windows active dir
+(Samba)
+openldap is a opensource software
+
+============================================================
+System utility cmd's
+
+uptime = uptime gives a one line display of the following information. The current time, how long the system has been running, how many users are currently logged on, 
+and the system load averages for the past 1, 5, and 15 minutes. This is the same information contained in the header line displayed by w(1).
+
+which cmd =  to find given cmd original path
+
+date = current date
+
+cal,bc
+
+=====================================================================
+Processes,job and scheduling
+
+Ps -- to display a list of your processes that are currently running and obtain additional information about those processes.
+ps -e,pe aux, pe -ef, ps -u username
+
+top -- top -u username, top c  for abs path, topk to kill the PID, top shift+M and Shift+P
+kill -- kill -l, -1 -- restart, -2 interrupt from the keyboard just like ctrl c, -9 forcefully kill the process
+systemctl -- systemctl that controls the service, /etc/systemd/system/servicename.service 
+crontab -- 
+crontab -e to edit
+crontab -l list of crontab
+crontab -r remove crontab
+crontab min hr day month day of week then echo statement > file
+at
+at HH:MM
+atq to check the entries
+atrm <ID> to remove
+future scheduling
+
+at 4PM + 4 days
+at now + 5 hours
+at 8:00 Sun
+at 2:45 AM MM:DD:YY
+at 10:00 Am next month
+ 
+Addition scheduling job
+
+etc/cron.* -- crons are setup
+etc/anacrontab == except hourly
+etc/cron.d/0hourly
+-------------------------------------------------------------------
+
+system monitoring commands
+
+top
+,df
+, du, iostat
+,iostat 1 to refresh each sec
+netstat =  netstat rnv
+dmesg, free = to check free space , /proc/cpuinfo to see CPU info , /proc/meminfo to see memory info
+
+
+========================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
