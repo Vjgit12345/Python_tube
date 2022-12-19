@@ -1,0 +1,145 @@
+Disk management
+
+Init 0
+to check run level = who -r
+
+System level 
+0 - shut down or halt
+1 single-user mode
+6 Reboot the system
+
+Other run level
+ 2 Multiuser mode without network
+ 3 Multiuser mode with network
+ 5 Multiuser mode with networking and GUI
+
+Computer Boot Process
+
+Power --> Motherboard(CPU)--> <--BIOS(CPU pulls info from BIOS)
+BIOS is a basic input and output.ROM Read only memory
+Then it goes to CMOS 
+CMOS has bios settings including system time date as well as hardware settings
+CMOS -  Complementary metal-oxide semiconductor
+its powered throught the battery that locates on motherboard
+Battery always keep the info of bios settings
+CPU read instruction from BIOS to POST(Power on self test)
+BIOS tells to CPU go and check all the devices are in working condition
+Next will disk, block in the disk conatin the first sector on HDD MBR Master boot record 
+MBR has the info about the OS
+From this point the os will load into RAM
+The above entire is called bootstrap
+
+Linux Boot process
+
+BIOS -- Basic i/o sys executes MBR
+MBR -- Master Boot Record executes GRUB
+GRUB -- Grand Unified Bootloader executes Kernel
+Kernel -- Kernel Executes /sbin/init -- then its starts initial RAM disk
+init -- exe run level programs
+Run level -- run level programs are exe from /etc/rc.d/rc*.d/
+
+Newer linux boot process
+
+BIOS -- Basic io settings (firmware interface)
+POST - power on self test started
+\-> MBR = Master boot record(Info saved in a 1st boot sector of a hard disk 
+that indicates where the GRUB2 is located so it can be loaded in computer RAM)
+\-> GRUB2 =  Grand Unified boot loader v2 loads linux kernel /boot/grub2/grub.cfg
+\-> Kernel = core of operating system loads require drivers from initrd.img 
+starts the 1st OS process(systemd)
+\-> systemd if then starts all the required processs
+Reads = /etc/systemd/system/default.target to bring the system to the run level
+
+===================================================
+Message of the day
+
+Write your message on etc/motd
+======================================================
+Customize message of the day
+
+vi /etc/motd.sh
+edit the /etc/ssh/sshd_config
+Remove#  and change print motd to "no"
+Restart the systemd sshd service
+====================================================
+Storage
+
+Local storage
+ --RAM,HDD,SSD etc
+DAS Direct attached storage
+ --CD/DVD, USB Flash drive
+SAN (Storage Area Network)
+ --Storage attached through iSCSI
+NAS Network Attached Storage
+ -- Storage attached over network
+SAmba and NFS whatever storage which is access through IP is called NFS
+===================================================================
+Disk partition
+df -h
+fdisk -l
+================================================================
+Add disk partition
+
+select p -->default-->default-->default then w
+assign to the filesystem mkfs.xfs /dev/sdb1
+create dir and mount /dev/.. /data to the data folder
+goto vi /etc/fstab
+and add the /dev/ tab /data	filesystem (xfs)	defaults	0	0	save and exit
+to unmount --> umount /dev/sdb1
+to remount --> mount-a
+========================================================================================
+File system check--fsck
+
+To check and repair linux FS (ext2,3,4..)
+xfs_repair to check and repair the filesystem for xfs type
+Ensure to exe the fsck on an unmounted file system to avoid any data corruption issues
+unmount the filesystem and run xfs_repair filesystem name
+Remount again
+-====================================================
+System backup.
+
+System,application,DB backup,Filesystem backup,Disk backup
+dd is a cmd to convert and copy files
+Its is used for tasks such as backing up the boot sector of a hard drive
+and obtaining a fixed amt of random data
+
+To backup or clone an entire hard disk to another hard disk connected 
+dd if<> of <> {option}
+dd if =/dev/sda of = /dev/sdb
+To backup/copy the disk partition
+dd if =/dev/sda1 of = /root/sda1.img
+===============================================================
+
+Network File system
+
+server side config
+
+install nfs-utils
+enable rpcbind
+enable nfs-server
+enable rpcbind,nfs-server,rpc-statd,nfs-idmapd
+mkdir /myshare
+chmod a+rwx /myshare
+vi /etc/exports 
+/myshare *(rw,sync,no_root_squash)
+exportfs -rv
+
+=========================================================
+ 
+Client side 
+
+install rpcbind
+enable the service rpcbind and disable the firewalld on both servers
+showmount -e "serverip"
+Create mount point
+mkdir /mnt/app
+mount "serverip":/serversharepath /mnt/clientsharepath
+=============================================================
+Samba
+
+Samba is a linux tool or utility that allows sharing for linux resources such as files
+and printers to with other OS
+
+exactly like NFS it share with other OS
+
+Samba shares its filesystem through a protocol called SMB and CIFS Server msg block, Common internet file system
